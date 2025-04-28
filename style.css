@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: black;
+  color: orange;
+}
+
+header {
+  background: orange;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.cta-button {
+  background: black;
+  color: orange;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.gallery {
+  background: black;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+.gallery img {
+  height: 200px;
+  margin-right: 20px;
+}
+
+.shifting-gallery {
+  display: flex;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(-50%);}
+}
+
+.features, .form-section, .pricing {
+  background: black;
+  color: orange;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.features ul, .pricing ul {
+  list-style: none;
+  padding: 0;
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.form-section input, .form-section button {
+  width: 80%;
+  padding: 10px;
+}
+
+footer {
+  background: orange;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
