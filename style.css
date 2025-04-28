@@ -46,7 +46,8 @@ header {
 
 .mockup-track {
   display: flex;
-  transition: transform 0.5s linear;
+  /* transition removed so JS can instantly update transform */
+  /* transition: transform 0.5s linear; */
 }
 
 .mockup-track img {
