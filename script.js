@@ -1,34 +1,38 @@
-const track       = document.getElementById('mockup-track');
-const scrollSpeed = 0.5;      // adjust as desired
-let position      = 0;
+window.addEventListener('load', () => {
+  const gallery      = document.getElementById('mockup-gallery');
+  const originalTrack = document.getElementById('mockup-track');
+  const images       = Array.from(originalTrack.children);
 
-// 1. Grab the originals
-const originals = Array.from(track.children);
+  // 1) Build two side-by-side tracks
+  const trackA = document.createElement('div');
+  const trackB = document.createElement('div');
+  trackA.className = 'mockup-track';
+  trackB.className = 'mockup-track';
+  images.forEach(img => {
+    trackA.appendChild(img.cloneNode());
+    trackB.appendChild(img.cloneNode());
+  });
 
-// 2. Measure total width of originals (including right margin)
-let totalWidth = 0;
-originals.forEach(img => {
-  const style       = window.getComputedStyle(img);
-  const marginRight = parseFloat(style.marginRight);
-  totalWidth += img.offsetWidth + marginRight;
-});
+  // 2) Clear gallery and insert tracks
+  gallery.innerHTML = '';
+  gallery.appendChild(trackA);
+  gallery.appendChild(trackB);
 
-// 3. Duplicate them in-place
-originals.forEach(img => {
-  track.appendChild(img.cloneNode(true));
-});
+  // 3) Measure one-track width
+  const trackWidth = trackA.offsetWidth;
+  let position     = 0;
+  const speed      = 0.5; // px per frame
 
-// 4. Animate
-function scrollGallery() {
-  position -= scrollSpeed;
-
-  // once we've scrolled a full cycle, reset to 0
-  if (Math.abs(position) >= totalWidth) {
-    position = 0;
+  // 4) Animate both tracks
+  function animate() {
+    position -= speed;
+    if (position <= -trackWidth) {
+      position += trackWidth;
+    }
+    trackA.style.transform = `translateX(${position}px)`;
+    trackB.style.transform = `translateX(${position + trackWidth}px)`;
+    requestAnimationFrame(animate);
   }
 
-  track.style.transform = `translateX(${position}px)`;
-  requestAnimationFrame(scrollGallery);
-}
-
-scrollGallery();
+  animate();
+});
