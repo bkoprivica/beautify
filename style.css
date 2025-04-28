@@ -46,13 +46,19 @@ header {
 
 .mockup-track {
   display: flex;
-  /* transition removed so JS can instantly update transform */
-  /* transition: transform 0.5s linear; */
+  /* infinite, hardware-accelerated scroll */
+  animation: scroll 30s linear infinite;
 }
 
 .mockup-track img {
   height: 200px;
   margin-right: 20px;
+}
+
+/* keyframes: move exactly one “set” (half the track) */
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .features, .form-section, .pricing {
