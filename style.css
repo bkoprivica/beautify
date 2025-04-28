@@ -39,26 +39,23 @@ header {
 }
 
 .mockup-gallery {
-  overflow: hidden;
-  width: 80%;
   position: relative;
+  width: 80%;
+  overflow: hidden;
 }
 
+/* both tracks sit absolutely on top of each other */
 .mockup-track {
   display: flex;
-  /* infinite, hardware-accelerated scroll */
-  animation: scroll 30s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* no transitions or animations here */
 }
 
 .mockup-track img {
   height: 200px;
   margin-right: 20px;
-}
-
-/* keyframes: move exactly one “set” (half the track) */
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
 }
 
 .features, .form-section, .pricing {
