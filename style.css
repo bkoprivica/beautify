@@ -22,26 +22,45 @@ header {
 }
 
 .gallery {
-  background: black;
   display: flex;
   align-items: center;
-  overflow-x: hidden;
+  background: black;
   padding: 20px;
+  overflow: hidden;
 }
 
-.gallery img {
+.original-photo {
+  flex: 0 0 auto;
+}
+
+.original-photo img {
+  height: 250px;
+  margin-right: 20px;
+}
+
+.mockup-gallery {
+  overflow: hidden;
+  width: 80%;
+}
+
+.mockup-track {
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+
+.mockup-track img {
   height: 200px;
   margin-right: 20px;
 }
 
-.shifting-gallery {
-  display: flex;
-  animation: scroll 10s linear infinite;
-}
-
+/* Slower speed */
 @keyframes scroll {
-  0% {transform: translateX(0);}
-  100% {transform: translateX(-50%);}
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .features, .form-section, .pricing {
