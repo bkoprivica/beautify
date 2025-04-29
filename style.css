@@ -41,16 +41,16 @@ header {
 .mockup-gallery {
   position: relative;
   width: 80%;
+  height: 200px;      /* <-- container tall enough for your 200px images */
   overflow: hidden;
 }
 
-/* both tracks sit absolutely on top of each other */
 .mockup-track {
   display: flex;
-  position: absolute;
+  position: absolute; /* sit your two tracks on top of each other */
   top: 0;
   left: 0;
-  /* no transitions or animations here */
+  /* no transition here */
 }
 
 .mockup-track img {
