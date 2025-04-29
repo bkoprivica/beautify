@@ -1,36 +1,31 @@
 window.addEventListener('load', () => {
-  const gallery      = document.getElementById('mockup-gallery');
-  const originalTrack = document.getElementById('mockup-track');
-  const images       = Array.from(originalTrack.children);
+  const gallery = document.getElementById('mockup-gallery');
+  const track   = document.getElementById('mockup-track');
+  const imgs    = Array.from(track.children);
 
-  // 1) Build two side-by-side tracks
-  const trackA = document.createElement('div');
-  const trackB = document.createElement('div');
-  trackA.className = 'mockup-track';
-  trackB.className = 'mockup-track';
-  images.forEach(img => {
-    trackA.appendChild(img.cloneNode());
-    trackB.appendChild(img.cloneNode());
-  });
+  // 1) compute full width (including each img’s margin-right)
+  const totalWidth = imgs.reduce((sum, img) => {
+    const mr = parseFloat(getComputedStyle(img).marginRight);
+    return sum + img.offsetWidth + mr;
+  }, 0);
 
-  // 2) Clear gallery and insert tracks
-  gallery.innerHTML = '';
-  gallery.appendChild(trackA);
-  gallery.appendChild(trackB);
+  // 2) clone the entire track for seamless looping
+  const track2 = track.cloneNode(true);
+  track2.removeAttribute('id');
+  gallery.appendChild(track2);
 
-  // 3) Measure one-track width
-  const trackWidth = trackA.offsetWidth;
-  let position     = 0;
-  const speed      = 0.5; // px per frame
+  let pos   = 0;
+  const speed = 0.5; // px/frame
 
-  // 4) Animate both tracks
   function animate() {
-    position -= speed;
-    if (position <= -trackWidth) {
-      position += trackWidth;
-    }
-    trackA.style.transform = `translateX(${position}px)`;
-    trackB.style.transform = `translateX(${position + trackWidth}px)`;
+    pos -= speed;
+    // wrap around
+    if (pos <= -totalWidth) pos += totalWidth;
+
+    // move both tracks
+    track.style.transform  = `translateX(${pos}px)`;
+    track2.style.transform = `translateX(${pos + totalWidth}px)`;
+
     requestAnimationFrame(animate);
   }
 
